@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="water.css">
+  <title>Emojinol</title>
+</head>
+<body>
+
+  <script src="z_emojinol.js"></script>
+
+  <h1>Español a Emojinol</h1>
+
+  <textarea id="input_textarea" placeholder="Ingresa algún texto"></textarea>
+  <textarea id="emojinol_textarea" disabled></textarea>
+  <textarea id="translated_textarea" disabled></textarea>
+
+  <h1>Emojinol a Español</h1>
+
+  <textarea id="input_textarea_r" placeholder="Ingresa algún texto"></textarea>
+  <textarea id="emojinol_textarea_r" disabled></textarea>
+
+  <script>
+    var input_textarea = document.getElementById('input_textarea');
+    var emojinol_textarea = document.getElementById('emojinol_textarea');
+    var translated_textarea = document.getElementById('translated_textarea');
+
+    input_textarea.addEventListener('input', function() {
+      var emojinol_res = emojinol(input_textarea.value, 1);
+      emojinol_textarea.value = emojinol_res;
+      var translated_res = emojinol(emojinol_res, 0);
+      translated_textarea.value = translated_res;
+    });
+
+    var input_textarea_r = document.getElementById('input_textarea_r');
+    var emojinol_textarea_r = document.getElementById('emojinol_textarea_r');
+
+    input_textarea_r.addEventListener('input', function() {
+      var emojinol_res = emojinol(input_textarea_r.value, 0);
+      emojinol_textarea_r.value = emojinol_res;
+    });
+  </script>
+  
+</body>
+</html>
