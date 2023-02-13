@@ -5,13 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-/**
+    /**
  * Automatic version:
  * Uses light theme by default but switches to dark theme
  * if a system-wide theme preference is set on the user's device.
  */
 
- :root {
+:root {
   --background-body: #fff;
   --background: #efefef;
   --background-alt: #f7f7f7;
@@ -1701,171 +1701,269 @@ body > footer {
 <body>
 
   <script>
-function emojinol(text, mode=1) {
-  dictionary = {
-    'a': '😀',
-    'b': '😁',
-    'c': '😂',
-    'd': '🤣',
-    'e': '😃',
-    'f': '😄',
-    'g': '😅',
-    'h': '😆',
-    'i': '😉',
-    'j': '😊',
-    'k': '🙄',
-    'l': '😋',
-    'm': '😎',
-    'n': '😍',
-    'ñ': '😘',
-    'o': '🥰',
-    'p': '😗',
-    'q': '😙',
-    'r': '😚',
-    's': '🙂',
-    't': '🤗',
-    'u': '🤩',
-    'v': '🤔',
-    'w': '🤨',
-    'x': '😐',
-    'y': '😑',
-    'z': '😶',
+    class Emojinol {
+  constructor() {
 
-    'A': '😏',
-    'B': '😣',
-    'C': '😥',
-    'D': '😮',
-    'E': '🤐',
-    'F': '😯',
-    'G': '😪',
-    'H': '😫',
-    'I': '🥱',
-    'J': '😴',
-    'K': '😌',
-    'L': '😛',
-    'M': '😜',
-    'N': '😝',
-    'Ñ': '🤤',
-    'O': '😒',
-    'P': '😓',
-    'Q': '😔',
-    'R': '😕',
-    'S': '🙃',
-    'T': '🤑',
-    'U': '😲',
-    'V': '🙁',
-    'W': '😖',
-    'X': '😞',
-    'Y': '😟',
-    'Z': '😤',
+    this.dictionary = {
+      'a': '😀',
+      'b': '😁',
+      'c': '😂',
+      'd': '🤣',
+      'e': '😃',
+      'f': '😄',
+      'g': '😅',
+      'h': '😆',
+      'i': '😉',
+      'j': '😊',
+      'k': '🙄',
+      'l': '😋',
+      'm': '😎',
+      'n': '😍',
+      'ñ': '😘',
+      'o': '🥰',
+      'p': '😗',
+      'q': '😙',
+      'r': '😚',
+      's': '🙂',
+      't': '🤗',
+      'u': '🤩',
+      'v': '🤔',
+      'w': '🤨',
+      'x': '😐',
+      'y': '😑',
+      'z': '😶',
+  
+      'A': '😏',
+      'B': '😣',
+      'C': '😥',
+      'D': '😮',
+      'E': '🤐',
+      'F': '😯',
+      'G': '😪',
+      'H': '😫',
+      'I': '🥱',
+      'J': '😴',
+      'K': '😌',
+      'L': '😛',
+      'M': '😜',
+      'N': '😝',
+      'Ñ': '🤤',
+      'O': '😒',
+      'P': '😓',
+      'Q': '😔',
+      'R': '😕',
+      'S': '🙃',
+      'T': '🤑',
+      'U': '😲',
+      'V': '🙁',
+      'W': '😖',
+      'X': '😞',
+      'Y': '😟',
+      'Z': '😤',
+  
+      'á': '😢',
+      'é': '😭',
+      'í': '😦',
+      'ó': '😨',
+      'ú': '😩',
+      'Á': '🤯',
+      'É': '😬',
+      'Í': '😰',
+      'Ó': '😱',
+      'Ú': '🥵',
+  
+      'ä': '🥶',
+      'ë': '😳',
+      'ï': '🤪',
+      'ö': '😵',
+      'ü': '🥴',
+      'Ä': '😠',
+      'Ë': '😡',
+      'Ï': '🤬',
+      'Ö': '😷',
+      'Ü': '🤒',
+  
+      ',': '💪',
+      '.': '🦶',
+      ';': '🤘',
+      ':': '✌',
+      '¿': '👆',
+      '?': '👇',
+      '¡': '👉',
+      '!': '👈',
+      '(': '👍',
+      ')': '👎',
+      '[': '🤜',
+      ']': '🤛',
+      '"': '👌',
+      '-': '✊',
+      '_': '💅',
+      '/': '👊',
+      '*': '🤝',
+      '+': '🙏',
+      '=': '🙌',
+      '#': '🖐',
+      '$': '🤙',
+      '%': '🤏',
+      '&': '🤟',
+      '|': '🦵',
+      '°': '👂',
+      '¬': '👃',
+      "'": '☝',
+      '{': '👐',
+      '}': '🤲',
+  
+      '0': '🐱',
+      '1': '😺',
+      '2': '😸',
+      '3': '😹',
+      '4': '😻',
+      '5': '😼',
+      '6': '😽',
+      '7': '🙀',
+      '8': '😿',
+      '9': '😾',
+    };
 
-    'á': '😢',
-    'é': '😭',
-    'í': '😦',
-    'ó': '😨',
-    'ú': '😩',
-    'Á': '🤯',
-    'É': '😬',
-    'Í': '😰',
-    'Ó': '😱',
-    'Ú': '🥵',
-
-    'ä': '🥶',
-    'ë': '😳',
-    'ï': '🤪',
-    'ö': '😵',
-    'ü': '🥴',
-    'Ä': '😠',
-    'Ë': '😡',
-    'Ï': '🤬',
-    'Ö': '😷',
-    'Ü': '🤒',
-
-    ',': '💪',
-    '.': '🦶',
-    ';': '🤘',
-    ':': '✌',
-    '¿': '👆',
-    '?': '👇',
-    '¡': '👉',
-    '!': '👈',
-    '(': '👍',
-    ')': '👎',
-    '[': '🤜',
-    ']': '🤛',
-    '"': '👌',
-    '-': '✊',
-    '_': '💅',
-    '/': '👊',
-    '*': '🤝',
-    '+': '🙏',
-    '=': '🙌',
-    '#': '🖐',
-    '$': '🤙',
-    '%': '🤏',
-    '&': '🤟',
-    '|': '🦵',
-    '°': '👂',
-    '¬': '👃',
-    "'": '☝',
-    '{': '👐',
-    '}': '🤲',
-
-    '0': '🐱',
-    '1': '😺',
-    '2': '😸',
-    '3': '😹',
-    '4': '😻',
-    '5': '😼',
-    '6': '😽',
-    '7': '🙀',
-    '8': '😿',
-    '9': '😾',
-  };
-
-  if (mode == 1) {
-    for (const [element_index, element] of Object.entries(dictionary)) {
-      text = text.replaceAll(element_index, element);
-    }
-  } else {
-    for (const [element_index, element] of Object.entries(dictionary)) {
-      text = text.replaceAll(element, element_index);
-    }
+    return true;
   }
 
+  translate(text, mode=1) {
+    if (mode == 1) {
+      for (const [element_index, element] of Object.entries(this.dictionary)) {
+        text = text.replaceAll(element_index, element);
+      }
+    } else {
+      for (const [element_index, element] of Object.entries(this.dictionary)) {
+        text = text.replaceAll(element, element_index);
+      }
+    }
+  
+    return text;
+  }
+
+  isEmojinol(text) {
+
+    var is_emojinol = true;
+
+    var emojinol_symbols = [];
+    for (const [element_index, element] of Object.entries(this.dictionary)) {
+      emojinol_symbols.push(element);
+    }
+    emojinol_symbols.push(' ');
+
+    var splited_text = [...text];
+    console.log(splited_text);
+    for (const word of splited_text) {
+      if (!emojinol_symbols.includes(word)) {
+        is_emojinol = false;
+      }
+    }
+
+    return is_emojinol;
+    
+  }
+}
+
+function emojinol(text, mode=1) {
+  var localClass = new Emojinol();
+  text = localClass.translate(text, mode);
   return text;
 }
   </script>
 
-  <h1>Español a Emojinol</h1>
+  <!-- <h1 style="text-align: center;">Emojinol</h1> -->
 
   <textarea id="input_textarea" placeholder="Ingresa algún texto"></textarea>
+  <button type="button" id="clean_button">Vaciar campo</button>
+  <button type="button" id="paste_button">Pegar portapapeles</button>
+  <button type="button" id="magic_button">Magia</button>
   <textarea id="emojinol_textarea" disabled></textarea>
+  <button type="button" id="copy_emojinol_button">Copiar Emojinol</button>
   <textarea id="translated_textarea" disabled></textarea>
-
-  <h1>Emojinol a Español</h1>
-
-  <textarea id="input_textarea_r" placeholder="Ingresa algún texto"></textarea>
-  <textarea id="emojinol_textarea_r" disabled></textarea>
+  <button type="button" id="copy_spanish_button">Copiar Español</button>
 
   <script>
     var input_textarea = document.getElementById('input_textarea');
     var emojinol_textarea = document.getElementById('emojinol_textarea');
     var translated_textarea = document.getElementById('translated_textarea');
+    var paste_button = document.getElementById('paste_button');
+    var copy_emojinol_button = document.getElementById('copy_emojinol_button');
+    var copy_spanish_button = document.getElementById('copy_spanish_button');
+    var clean_button = document.getElementById('clean_button');
+    var magic_button = document.getElementById('magic_button');
+
+    var emojinolClass = new Emojinol();
+    var textIsInputed = false;
+
+    function translate() {
+      var emojinol_res = emojinolClass.translate(input_textarea.value, 1);
+      emojinol_textarea.value = emojinol_res;
+      var translated_res = emojinolClass.translate(emojinol_res, 0);
+      translated_textarea.value = translated_res;
+    }
+
+    function makeMagic(cliptext) {
+      if (textIsInputed) {
+        navigator.clipboard.writeText(emojinol_textarea.value).then(
+          success => (console.log("text copied"), textIsInputed = false), 
+          err => console.log("error copying text")
+        );
+      } else {
+        input_textarea.value = cliptext;
+        translate();
+        if (emojinolClass.isEmojinol(cliptext)) {
+          console.log('is emojinol');
+          navigator.clipboard.writeText(translated_textarea.value).then(
+            success => (console.log("text copied")), 
+            err => console.log("error copying text")
+          );
+        } else {
+          console.log('is not emojinol');
+          navigator.clipboard.writeText(emojinol_textarea.value).then(
+            success => (console.log("text copied")), 
+            err => console.log("error copying text")
+          );
+        }
+      }
+    }
 
     input_textarea.addEventListener('input', function() {
-      var emojinol_res = emojinol(input_textarea.value, 1);
-      emojinol_textarea.value = emojinol_res;
-      var translated_res = emojinol(emojinol_res, 0);
-      translated_textarea.value = translated_res;
+      textIsInputed = true;
+      translate();
     });
 
-    var input_textarea_r = document.getElementById('input_textarea_r');
-    var emojinol_textarea_r = document.getElementById('emojinol_textarea_r');
+    magic_button.addEventListener('click', function() {
+      navigator.clipboard.readText().then(
+        cliptext => (makeMagic(cliptext)),
+        err => console.log(err)
+      );
+    });
 
-    input_textarea_r.addEventListener('input', function() {
-      var emojinol_res = emojinol(input_textarea_r.value, 0);
-      emojinol_textarea_r.value = emojinol_res;
+    clean_button.addEventListener('click', function() {
+      input_textarea.value = '';
+      translate();
+    });
+
+    paste_button.addEventListener('click', function() {
+      navigator.clipboard.readText().then(
+        cliptext => (input_textarea.value = cliptext, textIsInputed = false, translate()),
+        err => console.log(err)
+      );
+    });
+
+    copy_emojinol_button.addEventListener('click', function() {
+      navigator.clipboard.writeText(emojinol_textarea.value).then(
+        success => (console.log("text copied"), console.log('hola')), 
+        err => console.log("error copying text")
+      );
+    });
+
+    copy_spanish_button.addEventListener('click', function() {
+      navigator.clipboard.writeText(translated_textarea.value).then(
+        success => (console.log("text copied")), 
+        err => console.log("error copying text")
+      );
     });
   </script>
   
