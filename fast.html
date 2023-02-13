@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="water.css">
+  <title>Emojinol</title>
+</head>
+<body>
+
+  <script src="z_emojinol.js"></script>
+
+  <!-- <h1 style="text-align: center;">Emojinol</h1> -->
+
+  <textarea id="input_textarea" placeholder="Ingresa algún texto"></textarea>
+  <button type="button" id="clean_button">Vaciar campo</button>
+  <button type="button" id="paste_button">Pegar portapapeles</button>
+  <textarea id="emojinol_textarea" disabled></textarea>
+  <button type="button" id="copy_emojinol_button">Copiar Emojinol</button>
+  <textarea id="translated_textarea" disabled></textarea>
+  <button type="button" id="copy_spanish_button">Copiar Español</button>
+
+  <script>
+    var input_textarea = document.getElementById('input_textarea');
+    var emojinol_textarea = document.getElementById('emojinol_textarea');
+    var translated_textarea = document.getElementById('translated_textarea');
+    var paste_button = document.getElementById('paste_button');
+    var copy_emojinol_button = document.getElementById('copy_emojinol_button');
+    var copy_spanish_button = document.getElementById('copy_spanish_button');
+    var clean_button = document.getElementById('clean_button');
+
+    function translate() {
+      var emojinol_res = emojinol(input_textarea.value, 1);
+      emojinol_textarea.value = emojinol_res;
+      var translated_res = emojinol(emojinol_res, 0);
+      translated_textarea.value = translated_res;
+    }
+
+    input_textarea.addEventListener('input', function() {
+      translate();
+    });
+
+    clean_button.addEventListener('click', function() {
+      input_textarea.value = '';
+      translate();
+    });
+
+    paste_button.addEventListener('click', function() {
+      navigator.clipboard.readText().then(
+        cliptext => (input_textarea.value = cliptext, translate()),
+        err => console.log(err)
+      );
+    });
+
+    copy_emojinol_button.addEventListener('click', function() {
+      navigator.clipboard.writeText(emojinol_textarea.value).then(
+        success => (console.log("text copied"), console.log('hola')), 
+        err => console.log("error copying text")
+      );
+    });
+
+    copy_spanish_button.addEventListener('click', function() {
+      navigator.clipboard.writeText(translated_textarea.value).then(
+        success => (console.log("text copied")), 
+        err => console.log("error copying text")
+      );
+    });
+  </script>
+  
+</body>
+</html>
