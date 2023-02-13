@@ -16,6 +16,7 @@
   <textarea id="input_textarea" placeholder="Ingresa algún texto"></textarea>
   <button type="button" id="clean_button">Vaciar campo</button>
   <button type="button" id="paste_button">Pegar portapapeles</button>
+  <button type="button" id="magic_button">Magia</button>
   <textarea id="emojinol_textarea" disabled></textarea>
   <button type="button" id="copy_emojinol_button">Copiar Emojinol</button>
   <textarea id="translated_textarea" disabled></textarea>
@@ -29,16 +30,53 @@
     var copy_emojinol_button = document.getElementById('copy_emojinol_button');
     var copy_spanish_button = document.getElementById('copy_spanish_button');
     var clean_button = document.getElementById('clean_button');
+    var magic_button = document.getElementById('magic_button');
+
+    var emojinolClass = new Emojinol();
+    var textIsInputed = false;
 
     function translate() {
-      var emojinol_res = emojinol(input_textarea.value, 1);
+      var emojinol_res = emojinolClass.translate(input_textarea.value, 1);
       emojinol_textarea.value = emojinol_res;
-      var translated_res = emojinol(emojinol_res, 0);
+      var translated_res = emojinolClass.translate(emojinol_res, 0);
       translated_textarea.value = translated_res;
     }
 
+    function makeMagic(cliptext) {
+      if (textIsInputed) {
+        navigator.clipboard.writeText(emojinol_textarea.value).then(
+          success => (console.log("text copied"), textIsInputed = false), 
+          err => console.log("error copying text")
+        );
+      } else {
+        input_textarea.value = cliptext;
+        translate();
+        if (emojinolClass.isEmojinol(cliptext)) {
+          console.log('is emojinol');
+          navigator.clipboard.writeText(translated_textarea.value).then(
+            success => (console.log("text copied")), 
+            err => console.log("error copying text")
+          );
+        } else {
+          console.log('is not emojinol');
+          navigator.clipboard.writeText(emojinol_textarea.value).then(
+            success => (console.log("text copied")), 
+            err => console.log("error copying text")
+          );
+        }
+      }
+    }
+
     input_textarea.addEventListener('input', function() {
+      textIsInputed = true;
       translate();
+    });
+
+    magic_button.addEventListener('click', function() {
+      navigator.clipboard.readText().then(
+        cliptext => (makeMagic(cliptext)),
+        err => console.log(err)
+      );
     });
 
     clean_button.addEventListener('click', function() {
@@ -48,7 +86,7 @@
 
     paste_button.addEventListener('click', function() {
       navigator.clipboard.readText().then(
-        cliptext => (input_textarea.value = cliptext, translate()),
+        cliptext => (input_textarea.value = cliptext, textIsInputed = false, translate()),
         err => console.log(err)
       );
     });
