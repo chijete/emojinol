@@ -109,6 +109,11 @@ class Emojinol {
       "'": '☝',
       '{': '👐',
       '}': '🤲',
+      '@': '🍌',
+      '\\': '🥕',
+      '~': '🍓',
+      '<': '🍑',
+      '>': '🍒',
   
       '0': '🐱',
       '1': '😺',
@@ -150,7 +155,7 @@ class Emojinol {
     emojinol_symbols.push(' ');
 
     var splited_text = [...text];
-    console.log(splited_text);
+    // console.log(splited_text);
     for (const word of splited_text) {
       if (!emojinol_symbols.includes(word)) {
         is_emojinol = false;
